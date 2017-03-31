@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="app" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>备忘录</title>
+	<link rel="stylesheet" href="css/iconfont.css">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="js/angular.min.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body ng-controller="odd">
+	<div ng-click="datashow=false" ng-show=datashow class="zhezhao"></div>
+	<section>
+		<div class="left">
+			<header>
+				<h4>iCloud</h4>
+				<span class="tx">提醒事项<span class="iconfont">&#xe637;</span></span>
+				<span ng-click=zeng() class="iconfont jia">&#xe62e;</span>
+			</header>
+			<div>
+				<ul>
+					<li 
+					ng-click="che($index)" 
+					ng-repeat="v in list|filter:{name:dis}"
+					ng-style="{background:$index==index?'#000':''}">
+						<span style="background:{{v.color}}" class="yuan"></span>
+						<span class="sec">{{v.name}}</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="right">
+			<header>
+				<span class="iconfont fd">&#xe60a;</span>	
+				<input type="text" ng-model="dis">
+				<div>
+					<span>高昊</span>
+					<span class="iconfont">&#xe637;</span>
+					<span class="iconfont wh">&#xe6d7;</span>
+				</div>
+			</header>
+			<div class="center2">
+				<div ng-style="{color:list[index].color}" class="top">
+					<h2>{{list[index].name}}</h2>
+					<span ng-click="clibor()">选项</span>
+					<div ng-show=datashow class="xuze">
+						<input 
+						type="text" ng-model="listname"
+						ng-style="{color:colors}">
+						<p>列表颜色</p>
+						<ul>
+							<li ng-repeat="v in color" 
+							ng-style="{background:v,borderColor:colors==v?v:''}"
+							ng-click="clo(v)"
+							></li>
+						</ul>
+						<div class="bom">
+							<span ng-click="del()">删除</span>
+							<span ng-click="datashow=false">取消</span>
+							<span ng-click="go()">完成</span>
+						</div>
+					</div>
+				</div>
+				<p ng-click="datashoe=!datashoe" style="border-bottom: 1px solid #999;"><span class="iconfont jiantou">&#xe62b;</span>已完成:{{(list[index].don|filter:{dine:true}).length }}项</p>
+				<ul ng-show="datashoe" class="ulse">
+	
+					<li style="border-bottom: 1px solid #999;">2017年2月22日 星期三</li>
+					<li class="list" 
+					ng-repeat="v in list[index].don|filter:{dine:true}"
+					>
+						<span ng-click="dels(v)"  class='spans'
+						ng-style="{background:list[index].color,borderColor:list[index].color}">
+						</span>
+						<span class="sl">{{v.title}}</span>
+					</li>
+				</ul>
+				<ul class="uls">
+					<li class="list" ng-repeat="v in list[index].don|filter:{dine:false}"
+					ng-style="{borderColor:$index==inde?list[index].color:'',background:$index==inde?list[index].bck:''}"
+					ng-click="clo($index)">
+						<span ng-click="lists(v)"  
+						ng-style="{borderColor:list[index].color}" class='spans'>
+						</span>
+						<!-- <span ng-keydown="xiugai($event,v)" contenteditable class='sl'>{{v.title}}</span> -->
+						<input class="inputs" type="text" ng-model="v.title">
+					</li>
+				</ul>
+				<div class="tjxm" ng-model="xin" ng-click="xiang()">{{xin}}</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
